@@ -26,7 +26,7 @@ public class Calculator implements ActionListener{
         frame.setLayout(null);
 
         textField = new JTextField();
-        textField.setBounds(75, 15, 300, 39);
+        textField.setBounds(75, 15, 300, 43);
         textField.setFont(textFont);
         textField.setEditable(false); //Text in text box cannot be edited by the user, will have to use buttons.
 
@@ -101,6 +101,66 @@ public class Calculator implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < 10; i++) {
+            if (e.getSource() == numberButton[i]) {
+                textField.setText(textField.getText().concat(String.valueOf(i)));
+            }
+        }
 
+        if (e.getSource() == decimalButton) {
+            textField.setText(textField.getText().concat("."));
+        }
+
+        if (e.getSource() == additionButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '+';
+            textField.setText("");
+        }
+
+        if (e.getSource() == subtractButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '-';
+            textField.setText("");
+        }
+        if (e.getSource() == divisionButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '/';
+            textField.setText("");
+        }
+        if (e.getSource() == multiplicationButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '*';
+            textField.setText("");
+        }
+        //conditions for the different functions
+        if (e.getSource() == equalsButton) {
+            num2 = Double.parseDouble(textField.getText());
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1/num2;
+                    break;
+            }
+            textField.setText(String.valueOf(result));
+            num1 = result;
+        }
+        if (e.getSource() == clearButton) {
+            textField.setText("");//clearing the text field with empty quotes
+        }
+        if (e.getSource() == deleteButton) {
+            String string = textField.getText();
+            textField.setText("");
+            for (int i = 0; i < string.length() - 1; i++) {
+                textField.setText(textField.getText()+string.charAt(i));
+            }
+        }
     }
 }
