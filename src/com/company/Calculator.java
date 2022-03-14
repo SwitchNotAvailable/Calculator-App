@@ -28,6 +28,27 @@ public class Calculator implements ActionListener{
         textField = new JTextField();
         textField.setBounds(50, 25, 300, 50);
         textField.setFont(textFont);
+        textField.setEditable(false); //Text in text box cannot be edited by the user, will have to use buttons.
+
+        //Assigning function buttons
+        additionButton = new JButton("+");
+        subtractButton = new JButton("-");
+        deleteButton = new JButton("del");
+        divisionButton = new JButton("/");
+        decimalButton = new JButton(".");
+        equalsButton = new JButton("=");
+        multiplicationButton = new JButton("x");
+        clearButton = new JButton("clr");
+
+        //defining array of function buttons
+        functionButtons[0] = additionButton;
+        functionButtons[1] = subtractButton;
+        functionButtons[2] = deleteButton;
+        functionButtons[3] = divisionButton;
+        functionButtons[4] = decimalButton;
+        functionButtons[5] = equalsButton;
+        functionButtons[6] = multiplicationButton;
+        functionButtons[7] = clearButton;
 
 
         frame.add(textField);
