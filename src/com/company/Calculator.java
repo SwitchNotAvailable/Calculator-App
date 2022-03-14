@@ -26,7 +26,7 @@ public class Calculator implements ActionListener{
         frame.setLayout(null);
 
         textField = new JTextField();
-        textField.setBounds(50, 25, 300, 50);
+        textField.setBounds(75, 15, 300, 39);
         textField.setFont(textFont);
         textField.setEditable(false); //Text in text box cannot be edited by the user, will have to use buttons.
 
@@ -50,7 +50,25 @@ public class Calculator implements ActionListener{
         functionButtons[6] = multiplicationButton;
         functionButtons[7] = clearButton;
 
+        for (int i = 0; i < 8; i++) {
+            functionButtons[i].addActionListener(this);
+            functionButtons[i].setFont(textFont);
+            functionButtons[i].setFocusable(false); //removing focused dotted lines
+        }
 
+        for (int i = 0; i < 10; i++) {
+            numberButton[i] = new JButton(String.valueOf(i));
+            numberButton[i].addActionListener(this);
+            numberButton[i].setFont(textFont);
+            numberButton[i].setFocusable(false); //removing focused dotted lines
+        }
+
+        //putting the delete button and clear button in their own frame, away from fundamental functions
+        deleteButton.setBounds(63, 470, 145, 50);
+        clearButton.setBounds(220, 470, 145, 50);
+
+        frame.add(deleteButton);
+        frame.add(clearButton);
         frame.add(textField);
         frame.setVisible(true);
     }
