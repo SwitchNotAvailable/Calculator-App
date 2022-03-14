@@ -8,8 +8,9 @@ public class Calculator implements ActionListener{
     JFrame frame;
     JTextField textField;
     JButton[] numberButton = new JButton[10];
-    JButton[] functionButtons = new JButton[8];
+    JButton[] functionButtons = new JButton[10];
     JButton subtractButton, additionButton, deleteButton, divisionButton, decimalButton, equalsButton, multiplicationButton, clearButton;
+    JButton sineButton, cosineButton;
     JPanel panel;
 
     Font textFont = new Font(Font.DIALOG_INPUT, Font.BOLD|Font.ITALIC, 25);
@@ -18,6 +19,7 @@ public class Calculator implements ActionListener{
     double num2 = 0;
     double result = 0;
     char operator;
+    String operation;
 
     Calculator() {
         frame = new JFrame("Calculator");
@@ -39,6 +41,8 @@ public class Calculator implements ActionListener{
         equalsButton = new JButton("=");
         multiplicationButton = new JButton("x");
         clearButton = new JButton("AC");
+        sineButton = new JButton("sin");
+        cosineButton = new JButton("cos");
 
         //defining array of function buttons
         functionButtons[0] = additionButton;
@@ -49,8 +53,10 @@ public class Calculator implements ActionListener{
         functionButtons[5] = equalsButton;
         functionButtons[6] = multiplicationButton;
         functionButtons[7] = clearButton;
+        functionButtons[8] = sineButton;
+        functionButtons[9] = cosineButton;
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 10; i++) {
             functionButtons[i].addActionListener(this);
             functionButtons[i].setFont(textFont);
             functionButtons[i].setFocusable(false); //removing focused dotted lines
@@ -64,8 +70,10 @@ public class Calculator implements ActionListener{
         }
 
         //putting the delete button and clear button in their own frame, away from fundamental functions
-        deleteButton.setBounds(63, 470, 145, 50);
-        clearButton.setBounds(220, 470, 145, 50);
+        cosineButton.setBounds(49, 470, 85, 50);
+        sineButton.setBounds(140, 470, 85, 50);
+        deleteButton.setBounds(229, 470, 85, 50);
+        clearButton.setBounds(319, 470, 85, 50);
 
         panel = new JPanel();
         panel.setBounds(50, 75, 350, 370);
@@ -93,6 +101,8 @@ public class Calculator implements ActionListener{
 
 
         frame.add(panel);
+        frame.add(sineButton);
+        frame.add(cosineButton);
         frame.add(deleteButton);
         frame.add(clearButton);
         frame.add(textField);
@@ -148,6 +158,7 @@ public class Calculator implements ActionListener{
                 case '/':
                     result = num1/num2;
                     break;
+
             }
             textField.setText(String.valueOf(result));
             num1 = result;
@@ -162,5 +173,21 @@ public class Calculator implements ActionListener{
                 textField.setText(textField.getText()+string.charAt(i));
             }
         }
+
+        if (e.getSource() == sineButton) {
+            num2 = Double.parseDouble(textField.getText());
+
+            switch (operation) {
+                case "sin":
+                    Math.sin(Math.toRadians(result));
+                    break;
+                case "cos":
+                    Math.cos(Math.toRadians(result));
+                    break;
+            }
+            textField.setText(String.valueOf(result));
+            num2 = result;
+        }
+
     }
 }
